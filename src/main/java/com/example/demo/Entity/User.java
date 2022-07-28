@@ -29,8 +29,9 @@ public class User {
     @Column(nullable  = false)
     private String permissions;
     private int active;
+    private int loginMethod; // 0 - email, 1 - google
 
-    public User(String username, String email, String password, String roles, String permissions) {
+    public User(String username, String email, String password, String roles, String permissions,int loginMethod) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -38,11 +39,17 @@ public class User {
         this.roles = roles;
         this.permissions = permissions;
         active=1;
+        this.loginMethod=loginMethod;
     }
 
     public User() {
     }
 
+
+    //loginMethod 0 - email, 1 - google
+    public int getLoginMethod() {
+        return loginMethod;
+    }
 
 
     public long getId() {
@@ -90,7 +97,33 @@ public class User {
         return new ArrayList<>();
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBlocked(int blocked) {
+        this.blocked = blocked;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public void setLoginMethod(int loginMethod) {
+        this.loginMethod = loginMethod;
+    }
 
     public int getActive() {
         return active;

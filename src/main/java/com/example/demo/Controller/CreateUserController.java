@@ -30,6 +30,7 @@ public class CreateUserController {
         }
        String pwd=user.getPassword();
        user.setPassword(passwordEncoder.encode(pwd));
+       user.setLoginMethod(0);
         return userService.create(user);
     }
 }

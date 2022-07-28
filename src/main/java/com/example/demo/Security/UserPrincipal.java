@@ -62,4 +62,8 @@ public class UserPrincipal implements UserDetails
     public boolean isEnabled() {
         return true;
     }
+
+    public int getLoginMethod() {
+        return user.getLoginMethod();
+    }
 }

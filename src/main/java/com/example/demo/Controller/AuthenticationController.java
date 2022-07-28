@@ -5,6 +5,9 @@ import com.example.demo.JwtUtil.JwtUtil;
 import com.example.demo.JwtUtil.JwtRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +23,9 @@ public class AuthenticationController {
     AuthenticationManager authenticationManager;
 
     @Autowired
+    AuthenticationProvider authenticationProvider;
+
+    @Autowired
     UserDetailsService userDetailsService;
 
     @Autowired
@@ -32,7 +38,8 @@ public class AuthenticationController {
         String username = request.getUsername();
         String password = request.getPassword();
         try{
-            authenticationManager.authenticate(new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(username, password));
+            Authentication token = new UsernamePasswordAuthenticationToken(username, password);
+            Authentication res = authenticationManager.authenticate(token);
         }
         catch(Exception e){
            throw new RuntimeException("Invalid username or password");
